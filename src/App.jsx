@@ -1035,6 +1035,8 @@ function AdminDashboard({ setToast }) {
           </div>
         </div>
       )}
+
+      {tab === "events" && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
           <div className="card">
             <div style={{ fontFamily: "Barlow Condensed", fontSize: 16, letterSpacing: 1.5, color: "var(--gold)", marginBottom: 16 }}>POST NEW EVENT</div>
