@@ -681,7 +681,7 @@ function AdminDashboard({ setToast }) {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API}/auth/admin/login`, {
+      const res = await fetch(`${API}/api/auth/admin/login`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });

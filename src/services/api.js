@@ -58,7 +58,7 @@ class ApiService {
   // ============================================================
   
   async login(username, password) {
-    const data = await this.request("/auth/admin/login", {
+    const data = await this.request("/api/auth/admin/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
     });
