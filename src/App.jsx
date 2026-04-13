@@ -325,7 +325,7 @@ function Chatbot({ setToast }) {
       setData(finalData);
       setTyping(true);
       try {
-        const res = await fetch(`${API}/players/apply`, {
+        const res = await fetch(`${API}/api/players/apply`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -539,7 +539,7 @@ function AssessorPortal({ setToast }) {
 
   const handleSearch = async () => {
     try {
-      const res = await fetch(`${API}/players/search/${search.trim().toUpperCase()}`, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch(`${API}/api/players/search/${search.trim().toUpperCase()}`, { headers: { Authorization: `Bearer ${token}` } });
       const result = await res.json();
       if (res.ok) { setFound(result); setGrade(result.fitness_grade || ""); }
       else setToast({ message: result.error || "Player not found.", type: "error" });
@@ -550,7 +550,7 @@ function AssessorPortal({ setToast }) {
     if (!grade) { setToast({ message: "Select a fitness grade.", type: "error" }); return; }
     setLoading(true);
     try {
-      const res = await fetch(`${API}/players/${found.id}/grade`, {
+      const res = await fetch(`${API}/api/players/${found.id}/grade`, {
         method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ fitnessGrade: grade, sprint40m: stats.sprint40m || null, verticalJumpCm: stats.vertJump || null, assessorNotes: stats.notes || null }),
       });
@@ -695,7 +695,7 @@ function AdminDashboard({ setToast }) {
   const addTokens = async () => {
     if (!tokenInput.pharmacyId || !tokenInput.amount) return;
     try {
-      const res = await fetch(`${API}/admin/tokens/add`, {
+      const res = await fetch(`${API}/api/admin/tokens/add`, {
         method: "POST", headers: { "Content-Type": "application/json", ...authHeader },
         body: JSON.stringify({ partnerId: tokenInput.pharmacyId, amount: parseInt(tokenInput.amount) }),
       });
@@ -708,7 +708,7 @@ function AdminDashboard({ setToast }) {
   const addEvent = async () => {
     if (!newEvent.title || !newEvent.dates || !newEvent.location) { setToast({ message: "Fill all event fields.", type: "error" }); return; }
     try {
-      const res = await fetch(`${API}/admin/events`, {
+      const res = await fetch(`${API}/api/admin/events`, {
         method: "POST", headers: { "Content-Type": "application/json", ...authHeader },
         body: JSON.stringify(newEvent),
       });
@@ -720,7 +720,7 @@ function AdminDashboard({ setToast }) {
 
   const deleteEvent = async (id) => {
     try {
-      await fetch(`${API}/admin/events/${id}`, { method: "DELETE", headers: authHeader });
+      await fetch(`${API}/api/admin/events/${id}`, { method: "DELETE", headers: authHeader });
       setToast({ message: "Event removed." });
       loadDashboard();
     } catch { setToast({ message: "Connection error.", type: "error" }); }
@@ -733,7 +733,7 @@ function AdminDashboard({ setToast }) {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${API}/admin/partners`, {
+      const res = await fetch(`${API}/api/admin/partners`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...authHeader },
         body: JSON.stringify({ ...newPartner, tokenBalance: parseInt(newPartner.tokenBalance) }),
@@ -755,7 +755,7 @@ function AdminDashboard({ setToast }) {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${API}/admin/assessors`, {
+      const res = await fetch(`${API}/api/admin/assessors`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...authHeader },
         body: JSON.stringify(newAssessor),
@@ -801,7 +801,7 @@ function AdminDashboard({ setToast }) {
     setLoading(true);
     try {
       const endpoint = type === "partner" ? "partners" : "assessors";
-      const res = await fetch(`${API}/admin/${endpoint}/${id}/toggle`, {
+      const res = await fetch(`${API}/api/admin/${endpoint}/${id}/toggle`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", ...authHeader },
       });
