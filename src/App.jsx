@@ -131,8 +131,8 @@ function PublicPage({ setView }) {
 
   useEffect(() => {
     Promise.all([
-      fetch(`${API}/public/roster`).then(r => r.json()),
-      fetch(`${API}/public/stats`).then(r => r.json()),
+      fetch(`${API}/api/public/roster`).then(r => r.json()),
+      fetch(`${API}/api/public/stats`).then(r => r.json()),
     ]).then(([rosterData, statsData]) => {
       setRoster(Array.isArray(rosterData) ? rosterData : []);
       setStats(statsData);
@@ -224,7 +224,7 @@ function NoticeBoard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API}/public/events`).then(r => r.json()).then(data => {
+    fetch(`${API}/api/public/events`).then(r => r.json()).then(data => {
       setEvents(Array.isArray(data) ? data : []);
       setLoading(false);
     }).catch(() => setLoading(false));
