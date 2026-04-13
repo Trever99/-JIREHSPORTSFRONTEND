@@ -658,10 +658,10 @@ function AdminDashboard({ setToast }) {
   const loadDashboard = useCallback(async () => {
     try {
       const [dashRes, playersRes, partnersRes, assessorsRes] = await Promise.all([
-        fetch(`${API}/admin/dashboard`, { headers: authHeader }),
-        fetch(`${API}/players`, { headers: authHeader }),
-        fetch(`${API}/admin/partners`, { headers: authHeader }),
-        fetch(`${API}/admin/assessors`, { headers: authHeader }),
+        fetch(`${API}/api/admin/dashboard`, { headers: authHeader }),
+        fetch(`${API}/api/players`, { headers: authHeader }),
+        fetch(`${API}/api/admin/partners`, { headers: authHeader }),
+        fetch(`${API}/api/admin/assessors`, { headers: authHeader }),
       ]);
       const dash = await dashRes.json();
       const playersList = await playersRes.json();
