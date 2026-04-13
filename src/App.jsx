@@ -406,7 +406,7 @@ function PharmacyPortal({ setToast }) {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API}/auth/partner/login`, {
+      const res = await fetch(`${API}/api/auth/partner/login`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
@@ -526,7 +526,7 @@ function AssessorPortal({ setToast }) {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API}/auth/assessor/login`, {
+      const res = await fetch(`${API}/api/auth/assessor/login`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
