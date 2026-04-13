@@ -424,7 +424,7 @@ function PharmacyPortal({ setToast }) {
 
   const handleSearch = async () => {
     try {
-      const res = await fetch(`${API}/players/search/${search.trim().toUpperCase()}`, {
+      const res = await fetch(`${API}/api/players/search/${search.trim().toUpperCase()}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const result = await res.json();
@@ -437,7 +437,7 @@ function PharmacyPortal({ setToast }) {
     if (!vitals.height || !vitals.weight || !vitals.bp) { setToast({ message: "Fill in all vitals.", type: "error" }); return; }
     setLoading(true);
     try {
-      const res = await fetch(`${API}/players/${found.id}/verify`, {
+      const res = await fetch(`${API}/api/players/${found.id}/verify`, {
         method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ heightCm: vitals.height, weightKg: vitals.weight, bloodPressure: vitals.bp }),
       });
