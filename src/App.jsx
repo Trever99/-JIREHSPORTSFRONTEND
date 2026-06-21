@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import PharmacyScreening from "./components/PharmacyScreening.jsx";
+import CoachAssessment from "./components/CoachAssessment.jsx";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 // ============================================================
 // HELPERS
@@ -96,7 +98,9 @@ function Nav({ view, setView }) {
     { key: "chatbot", label: "Apply Now" },
     { key: "noticeboard", label: "Notice Board" },
     { key: "pharmacy", label: "Partner Portal" },
+    { key: "pharmacy-screening", label: "Pharmacy Screening" },
     { key: "assessor", label: "Assessor Portal" },
+    { key: "coach-assessment", label: "Coach Assessment" },
     { key: "admin", label: "Admin" },
   ];
   return (
@@ -1082,7 +1086,9 @@ export default function App() {
       {view === "chatbot" && <Chatbot setToast={setToast} />}
       {view === "noticeboard" && <NoticeBoard />}
       {view === "pharmacy" && <PharmacyPortal setToast={setToast} />}
+      {view === "pharmacy-screening" && <PharmacyScreening setToast={setToast} />}
       {view === "assessor" && <AssessorPortal setToast={setToast} />}
+      {view === "coach-assessment" && <CoachAssessment setToast={setToast} />}
       {view === "admin" && <AdminDashboard setToast={setToast} />}
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </>
